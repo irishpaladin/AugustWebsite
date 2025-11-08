@@ -1,0 +1,42 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vite
+dist/
+.vite/
+vite.config.timestamp-*
+vite.svg
+
+# Environment files
+*.env
+*.env.* 
+!.env.example
+
+# TypeScript
+*.tsbuildinfo
+
+# Mac / Windows / Linux junk
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+*.swp
+
+# Logs
+logs/
+*.log
+log.txt
+
+# Build artifacts
+*.local
+.cache/
+.eslintcache
+
+# Temporary
+tmp/
+temp/
