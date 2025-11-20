@@ -21,12 +21,12 @@ export default function Hero() {
                     <div className="mt-6 flex items-center gap-2 text-sm text-slate-600"><Star className="h-4 w-4 fill-current" /></div>
                 </div>
                 <div className="relative">
-                    <img src="https://images.unsplash.com/photo-1580982339219-2981e0a1385f?q=80&w=1400&auto=format&fit=crop" alt="Kids playing at daycare" className="h-[360px] w-full rounded-3xl object-cover shadow-soft" />
+                    <img src="../../public/images/display-image.jpeg" alt="Kids playing at daycare" className="h-[360px] w-full rounded-3xl object-cover shadow-soft" />
                     <div className="card absolute -bottom-6 -left-6 w-64">
                         <div className="flex items-center gap-3 p-4">
                             <div className="rounded-xl bg-pastel-lavender p-2 text-slate-800"><ShieldCheck className="h-5 w-5" /></div>
                             <div>
-                                <p className="text-sm font-semibold">State‑licensed</p>
+                                <p className="text-sm font-semibold">City‑licensed</p>
                                 <p className="text-xs text-slate-600">CPR‑trained staff</p>
                             </div>
                         </div>

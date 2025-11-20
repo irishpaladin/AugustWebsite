@@ -1,6 +1,6 @@
 import React from 'react'
 import TopBar from '@/sections/TopBar'
-import Navbar from '@/sections/NavBar'
+import Navbar from '@/sections/Navbar'
 import Hero from '@/sections/Hero'
 import About from '@/sections/About'
 import Programs from '@/sections/Programs'

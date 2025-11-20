@@ -4,9 +4,9 @@ import SectionTitle from '@/components/shared/SectionTitle'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 export default function Programs(){
   const list = [
-    { name:'Infants', age:'6–18 months', img:'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1200&auto=format&fit=crop', points:['Warm, responsive care','Individual sleep & feeding plans','Sensory play & music']},
-    { name:'Toddlers', age:'18–36 months', img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200&auto=format&fit=crop', points:['Language bursts & songs','Outdoor time daily','Potty‑learning support']},
-    { name:'Preschool', age:'3–5 years', img:'https://images.unsplash.com/photo-1596495578065-8aa9c47c2c07?q=80&w=1200&auto=format&fit=crop', points:['Kindergarten readiness','STEM + art centers','Social‑emotional skills']},
+    { name:'Infants', age:'6–18 months', img:"../../public/images/infants.jpeg", points:['Warm, responsive care','Individual sleep & feeding plans','Sensory play & music']},
+    { name:'Toddlers', age:'18–36 months', img:"../../public/images/toddler.jpeg", points:['Language bursts & songs','Outdoor time daily','Potty‑learning support']},
+    { name:'Preschool', age:'3–5 years', img:"../../public/images/preschool.jpeg", points:['Kindergarten readiness','STEM + art centers','Social‑emotional skills']},
   ]
   return (
     <section id="programs" className="border-b bg-gradient-to-br from-white to-pastel-sky py-16 md:py-24">
