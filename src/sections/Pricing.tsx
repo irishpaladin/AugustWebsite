@@ -1,108 +1,209 @@
-import React from "react"
+import React, { useMemo, useState } from "react"
 import Container from "@/components/shared/Container"
 import SectionTitle from "@/components/shared/SectionTitle"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Button } from "@/components/ui/Button"
 
-type PlanRate = {
-  name: string
-  price: string
-  note: string
+type CarePrices = {
+  monthly: string
+  sixMonth: string // use "n/a" if not available
+}
+
+type CareType = {
+  label: "Full-time" | "Part-time"
+  schedule: string
+  prices: CarePrices
 }
 
 type AgeTier = {
-  id: string
+  id: "infant" | "toddler" | "preschool"
   label: string
   ages: string
-  rates: PlanRate[]
+  careTypes: CareType[]
   form: string
   featured?: boolean
 }
 
 export default function Pricing() {
-  const ageTiers: AgeTier[] = [
-    {
-      id: "infant",
-      label: "Infant",
-      ages: "6–18 months",
-      rates: [
-        { name: "6-Month Plan", price: "$1,350", note: "6-month subscription" },
-        { name: "Monthly Plan", price: "$1,450", note: "Month-to-month" },
-      ],
-      form: "/forms/Infant_form.pdf",
-      featured: true,
-    },
-    {
-      id: "toddler",
-      label: "Toddler",
-      ages: "18–36 months",
-      rates: [
-        { name: "6-Month Plan", price: "$1,250", note: "6-month subscription" },
-        { name: "Monthly Plan", price: "$1,350", note: "Month-to-month" },
-      ],
-      form: "/forms/Toddler_form.pdf",
-    },
-    {
-      id: "preschool",
-      label: "Preschool",
-      ages: "3–5 years",
-      rates: [
-        { name: "6-Month Plan", price: "$1,150", note: "6-month subscription" },
-        { name: "Monthly Plan", price: "$1,250", note: "Month-to-month" },
-      ],
-      form: "/forms/Preschool_form.pdf",
-    },
-  ]
+  const ageTiers: AgeTier[] = useMemo(
+    () => [
+      {
+        id: "infant",
+        label: "Infant",
+        ages: "0–1.5 years old",
+        careTypes: [
+          {
+            label: "Full-time",
+            schedule: "5 days/wk",
+            prices: { monthly: "$1,358", sixMonth: "$1,298" },
+          },
+          {
+            label: "Part-time",
+            schedule: "3 days/wk",
+            prices: { monthly: "$908", sixMonth: "n/a" },
+          },
+        ],
+        form: "/forms/Infant_form.pdf",
+      },
+      {
+        id: "toddler",
+        label: "Toddler",
+        ages: "1.6–3 years old",
+        careTypes: [
+          {
+            label: "Full-time",
+            schedule: "5 days/wk",
+            prices: { monthly: "$1,208", sixMonth: "$1,148" },
+          },
+          {
+            label: "Part-time",
+            schedule: "3 days/wk",
+            prices: { monthly: "$808", sixMonth: "n/a" },
+          },
+        ],
+        form: "/forms/Toddler_form.pdf",
+      },
+      {
+        id: "preschool",
+        label: "Preschool",
+        ages: "3–5 years old",
+        careTypes: [
+          {
+            label: "Full-time",
+            schedule: "5 days/wk",
+            prices: { monthly: "$1,058", sixMonth: "$1,008" },
+          },
+          {
+            label: "Part-time",
+            schedule: "3 days/wk",
+            prices: { monthly: "$708", sixMonth: "n/a" },
+          },
+        ],
+        form: "/forms/Preschool_form.pdf",
+        featured: true,
+      },
+    ],
+    []
+  )
+
+  const [activeId, setActiveId] = useState<AgeTier["id"]>("toddler")
+  const activeTier = ageTiers.find((t) => t.id === activeId) ?? ageTiers[0]
 
   return (
     <section id="pricing" className="border-b bg-white py-16 md:py-24">
       <Container>
         <SectionTitle
-          kicker="Tuition"
+          kicker="Monthly Fee Schedule"
           title="Simple, transparent pricing"
-          subtitle="Download the enrollment form for your child’s age group, fill it out, and email it back to us."
+          subtitle="Select an age group to view rates. Download the enrollment form, fill it out, and email it back to us."
         />
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {ageTiers.map((tier) => (
-            <Card
-              key={tier.id}
-              className={`relative transition-shadow ${
-                tier.featured ? "ring-2 ring-primary shadow-lg" : ""
-              }`}
-            >
-              {tier.featured && (
-                <span className="badge absolute -top-3 left-1/2 -translate-x-1/2 bg-pastel-rose">
-                  Most Popular
-                </span>
-              )}
-
-              <CardHeader>
-                <CardTitle className="text-xl">{tier.label}</CardTitle>
-                <p className="text-sm text-slate-600">{tier.ages}</p>
-              </CardHeader>
-
-              <CardContent>
-                <div className="mb-4 space-y-3 text-sm">
-                  {tier.rates.map((rate) => (
-                    <div
-                      key={rate.name}
-                      className="flex items-baseline justify-between rounded-xl bg-slate-50 px-3 py-2"
+        <div className="mx-auto w-full max-w-[75vw] xl:max-w-5xl">
+          <Card className="relative">
+            <CardHeader className="space-y-4">
+              {/* Tabs: always 3 across, each = 1/3 width */}
+              <div
+                role="tablist"
+                aria-label="Age group tabs"
+                className="grid w-full grid-cols-3 gap-2 rounded-2xl bg-slate-50 p-2"
+              >
+                {ageTiers.map((tier) => {
+                  const isActive = tier.id === activeId
+                  return (
+                    <button
+                      key={tier.id}
+                      role="tab"
+                      aria-selected={isActive}
+                      aria-controls={`panel-${tier.id}`}
+                      id={`tab-${tier.id}`}
+                      onClick={() => setActiveId(tier.id)}
+                      type="button"
+                      className={[
+                        "w-full rounded-xl text-left transition",
+                        "ring-1 ring-transparent",
+                        // smaller on mobile, bigger on sm+
+                        "px-2.5 py-2 sm:px-4 sm:py-3",
+                        isActive
+  ? "bg-pastel-lavender shadow-sm ring-2 ring-primary"
+  : "bg-white/60 hover:bg-white hover:ring-slate-200"
+,
+                      ].join(" ")}
                     >
-                      <div>
-                        <p className="font-medium">{rate.name}</p>
-                        <p className="text-xs text-slate-500">{rate.note}</p>
-                      </div>
-                      <p className="text-base font-semibold text-slate-800">
-                        {rate.price}
+                      <p className="text-sm font-semibold text-slate-900">
+                        {tier.label}
                       </p>
+                      <p className="text-[11px] leading-tight text-slate-600 sm:text-xs">
+                        {tier.ages}
+                      </p>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Active tier title */}
+              <div>
+                <CardTitle className="text-2xl">{activeTier.label}</CardTitle>
+                <p className="text-sm text-slate-600">{activeTier.ages}</p>
+              </div>
+            </CardHeader>
+
+            <CardContent
+              id={`panel-${activeTier.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${activeTier.id}`}
+            >
+              {/* "Table-like" layout for rates */}
+              <div className="overflow-hidden rounded-2xl border border-slate-200">
+                <div className="grid grid-cols-3 bg-slate-100 px-4 py-3 text-xs font-semibold text-slate-700">
+                  <div>Care Type</div>
+                  <div>Monthly Plan</div>
+                  <div>6-Month Plan</div>
+                </div>
+
+                <div className="divide-y divide-slate-200">
+                  {activeTier.careTypes.map((care) => (
+                    <div
+                      key={care.label}
+                      className="grid grid-cols-3 items-center px-4 py-3 text-sm"
+                    >
+                      <div className="font-medium text-slate-900">
+                        {care.label}{" "}
+                        <span className="ml-1 text-xs text-slate-500">
+                          ({care.schedule})
+                        </span>
+                      </div>
+
+                      <div className="font-semibold text-slate-900">
+                        {care.prices.monthly}
+                      </div>
+
+                      <div
+                        className={[
+                          "font-semibold",
+                          care.prices.sixMonth.toLowerCase() === "n/a"
+                            ? "text-slate-400"
+                            : "text-slate-900",
+                        ].join(" ")}
+                      >
+                        {care.prices.sixMonth}
+                      </div>
                     </div>
                   ))}
                 </div>
+              </div>
 
-                <a href={tier.form} download>
+              {/* Drop-in note */}
+              <p className="mt-4 rounded-2xl bg-slate-50 px-4 py-3 text-xs text-slate-600">
+                <span className="font-semibold">Drop-In Care:</span> Drop-in rates
+                are prorated from the monthly fee based on the child’s age group.
+                Availability is limited and subject to space.
+              </p>
+
+              {/* Download Form */}
+              <div className="mt-5">
+                <a href={activeTier.form} download>
                   <Button type="button" className="w-full rounded-xl">
-                    Download {tier.label.toLowerCase()} form
+                    Download {activeTier.label.toLowerCase()} form
                   </Button>
                 </a>
 
@@ -116,14 +217,14 @@ export default function Pricing() {
                   </a>
                   .
                 </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </div>
+            </CardContent>
+          </Card>
 
-        <p className="mt-6 text-center text-sm text-slate-600">
-          * Enrollment is confirmed once we receive your completed form by email.
-        </p>
+          <p className="mt-6 text-center text-sm text-slate-600">
+            * Enrollment is confirmed once we receive your completed form by email.
+          </p>
+        </div>
       </Container>
     </section>
   )
