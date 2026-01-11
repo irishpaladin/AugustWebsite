@@ -16,11 +16,76 @@ export default function Contact(){
             <CardHeader><CardTitle>Send a message</CardTitle></CardHeader>
             <ContactForm toEmail="august.daycare@outlook.com" />
           </Card>
-          <div className="grid content-start gap-4">
-            <Card><CardContent className="flex items-center gap-3 pt-6 pb-6"><MapPin className="h-5 w-5 text-primary"/><div><p className="font-semibold">{STRINGS.ADDRESS_LINE1}</p><p className="text-sm text-slate-600">{STRINGS.ADDRESS_LINE2}</p></div></CardContent></Card>
-            <Card><CardContent className="flex items-center gap-3 pt-6 pb-6"><Clock className="h-5 w-5 text-primary"/><div><p className="font-semibold">{STRINGS.OPEN_DAYS}</p><p className="text-sm text-slate-600">{STRINGS.OPEN_TIME}</p></div></CardContent></Card>
-            <div className="overflow-hidden rounded-2xl shadow-soft"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1400&auto=format&fit=crop" alt="Daycare exterior" className="h-64 w-full object-cover"/></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+  {/* LEFT COLUMN */}
+  <div className="flex flex-col gap-4 h-full">
+
+    {/* ADDRESS CARD */}
+    <Card className="flex-1">
+      <CardContent className="h-full flex flex-col justify-between p-8 pt-8 bg-pastel-sky/20 rounded-xl">
+
+        {/* Header / Icon */}
+        <div className="flex items-center gap-3">
+          <div className="rounded-xl bg-primary/10 p-3">
+            <MapPin className="h-6 w-6 text-primary" />
           </div>
+          <h4 className="font-semibold text-lg">Our Location</h4>
+        </div>
+
+        {/* Center content */}
+        <div className="flex-1 flex items-center">
+          <div>
+            <p className="font-semibold text-lg">{STRINGS.ADDRESS_LINE1}</p>
+            <p className="text-sm text-slate-600">{STRINGS.ADDRESS_LINE2}</p>
+          </div>
+        </div>
+
+        {/* Bottom accent */}
+        <div className="w-full h-1 rounded-full bg-primary/20" />
+      </CardContent>
+    </Card>
+
+    {/* HOURS CARD */}
+    <Card className="flex-1">
+      <CardContent className="h-full flex flex-col justify-between p-8 pt-8 bg-pastel-peach/20 rounded-xl">
+
+        {/* Header / Icon */}
+        <div className="flex items-center gap-3">
+          <div className="rounded-xl bg-primary/10 p-3">
+            <Clock className="h-6 w-6 text-primary" />
+          </div>
+          <h4 className="font-semibold text-lg">Open Hours</h4>
+        </div>
+
+        {/* Center content */}
+        <div className="flex-1 flex items-center">
+          <div>
+            <p className="font-semibold text-lg">{STRINGS.OPEN_DAYS}</p>
+            <p className="text-sm text-slate-600">{STRINGS.OPEN_TIME}</p>
+          </div>
+        </div>
+
+        {/* Bottom accent */}
+        <div className="w-full h-1 rounded-full bg-primary/20" />
+      </CardContent>
+    </Card>
+
+  </div>
+
+  {/* RIGHT COLUMN — Portrait image/video */}
+  <div className="overflow-hidden rounded-2xl shadow-soft h-[400px]">
+    <video
+      src="../../../public/images/address.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="h-full w-full object-cover"
+    />
+  </div>
+
+</div>
         </div>
       </Container>
     </section>

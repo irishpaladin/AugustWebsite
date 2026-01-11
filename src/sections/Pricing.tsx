@@ -1,33 +1,129 @@
-import React from 'react'
-import Container from '@/components/shared/Container'
-import SectionTitle from '@/components/shared/SectionTitle'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-export default function Pricing(){
-  const tiers = [
-    {name:'Part‑Time', price:'$599', note:'2 days/week', perks:['8am–5pm','Snacks included','Monthly progress notes'], featured:false},
-    {name:'Full‑Time', price:'$999', note:'5 days/week', perks:['7:30am–5:30pm','Healthy lunches','Weekly enrichment'], featured:true},
-    {name:'Drop‑In', price:'$85', note:'per day', perks:['Based on availability','Bring lunch','Ages 2+'], featured:false},
+import React from "react"
+import Container from "@/components/shared/Container"
+import SectionTitle from "@/components/shared/SectionTitle"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
+import { Button } from "@/components/ui/Button"
+
+type PlanRate = {
+  name: string
+  price: string
+  note: string
+}
+
+type AgeTier = {
+  id: string
+  label: string
+  ages: string
+  rates: PlanRate[]
+  form: string
+  featured?: boolean
+}
+
+export default function Pricing() {
+  const ageTiers: AgeTier[] = [
+    {
+      id: "infant",
+      label: "Infant",
+      ages: "6–18 months",
+      rates: [
+        { name: "6-Month Plan", price: "$1,350", note: "6-month subscription" },
+        { name: "Monthly Plan", price: "$1,450", note: "Month-to-month" },
+      ],
+      form: "/forms/Infant_form.pdf",
+      featured: true,
+    },
+    {
+      id: "toddler",
+      label: "Toddler",
+      ages: "18–36 months",
+      rates: [
+        { name: "6-Month Plan", price: "$1,250", note: "6-month subscription" },
+        { name: "Monthly Plan", price: "$1,350", note: "Month-to-month" },
+      ],
+      form: "/forms/Toddler_form.pdf",
+    },
+    {
+      id: "preschool",
+      label: "Preschool",
+      ages: "3–5 years",
+      rates: [
+        { name: "6-Month Plan", price: "$1,150", note: "6-month subscription" },
+        { name: "Monthly Plan", price: "$1,250", note: "Month-to-month" },
+      ],
+      form: "/forms/Preschool_form.pdf",
+    },
   ]
+
   return (
     <section id="pricing" className="border-b bg-white py-16 md:py-24">
       <Container>
-        <SectionTitle kicker="Tuition" title="Simple, transparent pricing" subtitle="Sibling rate available for enrolled families."/>
+        <SectionTitle
+          kicker="Tuition"
+          title="Simple, transparent pricing"
+          subtitle="Download the enrollment form for your child’s age group, fill it out, and email it back to us."
+        />
+
         <div className="grid gap-6 md:grid-cols-3">
-          {tiers.map(t => (
-            <Card key={t.name} className={`relative ${t.featured? 'ring-2 ring-primary' : ''}`}>
-              {t.featured && <span className="badge absolute -top-3 left-1/2 -translate-x-1/2 bg-pastel-rose">Most Popular</span>}
-              <CardHeader><CardTitle className="text-xl">{t.name}</CardTitle></CardHeader>
+          {ageTiers.map((tier) => (
+            <Card
+              key={tier.id}
+              className={`relative transition-shadow ${
+                tier.featured ? "ring-2 ring-primary shadow-lg" : ""
+              }`}
+            >
+              {tier.featured && (
+                <span className="badge absolute -top-3 left-1/2 -translate-x-1/2 bg-pastel-rose">
+                  Most Popular
+                </span>
+              )}
+
+              <CardHeader>
+                <CardTitle className="text-xl">{tier.label}</CardTitle>
+                <p className="text-sm text-slate-600">{tier.ages}</p>
+              </CardHeader>
+
               <CardContent>
-                <div className="mb-4 flex items-end gap-1"><span className="text-4xl font-extrabold">{t.price}</span><span className="text-sm text-slate-600">/ mo</span></div>
-                <p className="mb-4 text-sm text-slate-600">{t.note}</p>
-                <ul className="mb-6 space-y-2 text-sm text-slate-700">{t.perks.map(p=> <li key={p}>• {p}</li>)}</ul>
-                <Button className="w-full rounded-xl">Choose {t.name}</Button>
+                <div className="mb-4 space-y-3 text-sm">
+                  {tier.rates.map((rate) => (
+                    <div
+                      key={rate.name}
+                      className="flex items-baseline justify-between rounded-xl bg-slate-50 px-3 py-2"
+                    >
+                      <div>
+                        <p className="font-medium">{rate.name}</p>
+                        <p className="text-xs text-slate-500">{rate.note}</p>
+                      </div>
+                      <p className="text-base font-semibold text-slate-800">
+                        {rate.price}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <a href={tier.form} download>
+                  <Button type="button" className="w-full rounded-xl">
+                    Download {tier.label.toLowerCase()} form
+                  </Button>
+                </a>
+
+                <p className="mt-2 text-center text-[11px] text-slate-500">
+                  After filling out the form, please email it to{" "}
+                  <a
+                    href="mailto:august.daycare@outlook.com"
+                    className="text-primary underline"
+                  >
+                    august.daycare@outlook.com
+                  </a>
+                  .
+                </p>
               </CardContent>
             </Card>
           ))}
         </div>
-        <p className="mt-6 text-center text-sm text-slate-600">* Prices are sample placeholders. Update for your center.</p>
+
+        <p className="mt-6 text-center text-sm text-slate-600">
+          * Enrollment is confirmed once we receive your completed form by email.
+        </p>
       </Container>
     </section>
   )

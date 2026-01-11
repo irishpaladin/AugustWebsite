@@ -4,9 +4,9 @@ import SectionTitle from '@/components/shared/SectionTitle'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 export default function Programs(){
   const list = [
-    { name:'Infants', age:'6–18 months', img:"../../public/images/infants.jpeg", points:['Warm, responsive care','Individual sleep & feeding plans','Sensory play & music']},
-    { name:'Toddlers', age:'18–36 months', img:"../../public/images/toddler.jpeg", points:['Language bursts & songs','Outdoor time daily','Potty‑learning support']},
-    { name:'Preschool', age:'3–5 years', img:"../../public/images/preschool.jpeg", points:['Kindergarten readiness','STEM + art centers','Social‑emotional skills']},
+    { name:'Infants', age:'0–1.5 years old', img:"../../public/images/infants.jpeg", points:['Warm, responsive care','Individual sleep & feeding plans','Sensory play & music']},
+    { name:'Toddlers', age:'1.6–3 years old', img:"../../public/images/toddler.jpeg", points:['Language bursts & songs','Outdoor time daily','Potty‑learning support']},
+    { name:'Preschool', age:'3–5 years old', img:"../../public/images/preschool.jpeg", points:['Kindergarten readiness','Social‑emotional skills']},
   ]
   return (
     <section id="programs" className="border-b bg-gradient-to-br from-white to-pastel-sky py-16 md:py-24">

@@ -5,20 +5,20 @@ export default {
         extend: {
             colors: {
                 // Pastel palette
-                "pastel-lavender": "#E9D8FD", // primary
+                "pastel-lavender": "#FED7AA", // primary
                 "pastel-rose": "#FDE2E4",
                 "pastel-peach": "#FFE5D9",
                 "pastel-mint": "#D1FAE5",
                 "pastel-sky": "#E0F2FE",
                 "pastel-butter": "#FEF3C7",
-                "orange": "#FF964F",
+                "pastel-orange": "#FF964F",
                 primary: {
-                    DEFAULT: "#C4B5FD", // lavender 300/400 vibe
-                    50: "#F5F3FF",
-                    100: "#EDE9FE",
-                    200: "#DDD6FE",
-                    300: "#C4B5FD",
-                    400: "#A78BFA"
+                     DEFAULT: "#FB923C", // Tailwind Orange 400 — friendly and bright
+    50:  "#FFF7ED",
+    100: "#FFEDD5",
+    200: "#FED7AA",
+    300: "#FDBA74",
+    400: "#FB923C",  // DEFAULT
                 }
             },
             borderRadius: {
