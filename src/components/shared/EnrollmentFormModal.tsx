@@ -307,7 +307,17 @@ export default function EnrollmentFormModal({ open, onClose, tierId, pdfUrl }: P
           className="relative w-full max-w-3xl px-3 sm:px-6"
         >
           <Card className="flex max-h-[90vh] flex-col overflow-hidden rounded-2xl shadow-xl">
-            <CardHeader className="shrink-0 space-y-2">
+            <CardHeader className="relative shrink-0 space-y-2">
+              {/* Close button */}
+              <button
+                type="button"
+                aria-label="Close modal"
+                onClick={onClose}
+                className="absolute right-3 top-3 rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                ✕
+              </button>
+
               <CardTitle className="text-xl">{title}</CardTitle>
               <p className="text-sm text-slate-600">
                 Fill this out and submit. You can still download the PDF version below.
