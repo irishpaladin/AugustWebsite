@@ -224,68 +224,69 @@ export default function EnrollmentFormModal({ open, onClose, tierId, pdfUrl }: P
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
 
     setSubmitting(true)
 
-    try {
-      // Build email content
-      const subject = `Enrollment Inquiry (${tierId}) — ${form.childName}`
-      const bodyLines: string[] = [
-        `Hello August Daycare,`,
-        ``,
-        `I’m interested in enrolling my child. Here are our details:`,
-        ``,
-        `PARENT / GUARDIAN`,
-        `Name: ${form.parentName}`,
-        `Phone: ${form.phoneNumber}`,
-        `Email: ${form.emailAddress}`,
-        `Preferred contact: ${form.preferredContact || "Not specified"}`,
-        ``,
-        `CHILD`,
-        `Child name: ${form.childName}`,
-        `DOB/Age: ${form.childDobOrAge}`,
-        `Number of children needing care: ${form.numberOfChildren}`,
-        ``,
-        `CARE DETAILS`,
-        `Desired start date: ${form.desiredStartDate || "Not specified"}`,
-        `Days needed: ${daysLabel}`,
-        `Hours needed: ${form.hoursNeeded || "Not specified"}`,
-        ``,
-        `ADDITIONAL`,
-        `Allergies/medical needs: ${form.allergiesHas === "yes" ? form.allergiesExplain || "(not provided)" : form.allergiesHas === "no" ? "No" : "Not specified"
-        }`,
-        `Referral source: ${form.referralSource || "Not specified"}`,
-        ``,
-        `Questions/comments:`,
-        `${form.questionsOrComments?.trim() ? form.questionsOrComments.trim() : "None"}`,
-        ``,
-        `Thanks!`,
-        `${form.parentName}`,
-      ]
-      const nextEmailContent = bodyLines.join("\n")
-      setEmailContent(nextEmailContent)
+    // Build email content
+    const subject = `Enrollment Inquiry (${tierId}) — ${form.childName}`
+    const bodyLines: string[] = [
+      `Hello August Daycare,`,
+      ``,
+      `I’m interested in enrolling my child. Here are our details:`,
+      ``,
+      `PARENT / GUARDIAN`,
+      `Name: ${form.parentName}`,
+      `Phone: ${form.phoneNumber}`,
+      `Email: ${form.emailAddress}`,
+      `Preferred contact: ${form.preferredContact || "Not specified"}`,
+      ``,
+      `CHILD`,
+      `Child name: ${form.childName}`,
+      `DOB/Age: ${form.childDobOrAge}`,
+      `Number of children needing care: ${form.numberOfChildren}`,
+      ``,
+      `CARE DETAILS`,
+      `Desired start date: ${form.desiredStartDate || "Not specified"}`,
+      `Days needed: ${daysLabel}`,
+      `Hours needed: ${form.hoursNeeded || "Not specified"}`,
+      ``,
+      `ADDITIONAL`,
+      `Allergies/medical needs: ${form.allergiesHas === "yes"
+        ? form.allergiesExplain || "(not provided)"
+        : form.allergiesHas === "no"
+          ? "No"
+          : "Not specified"
+      }`,
+      `Referral source: ${form.referralSource || "Not specified"}`,
+      ``,
+      `Questions/comments:`,
+      `${form.questionsOrComments?.trim() ? form.questionsOrComments.trim() : "None"}`,
+      ``,
+      `Thanks!`,
+      `${form.parentName}`,
+    ]
 
-      const mailtoHref = buildMailto({
-        to: TO_EMAIL,
-        subject,
-        body: nextEmailContent,
-      })
+    const nextEmailContent = bodyLines.join("\n")
+    setEmailContent(nextEmailContent)
 
-      // Show loading text briefly (also helps ensure UI updates before navigation)
-      await new Promise((r) => setTimeout(r, 600))
+    const mailtoHref = buildMailto({
+      to: TO_EMAIL,
+      subject,
+      body: nextEmailContent,
+    })
 
-      // Open default email app (mailto)
-      window.location.href = mailtoHref
+    // Update UI first (so when they come back, they see success state)
+    setSubmitted(true)
 
-      // Swap UI to success message
-      setSubmitted(true)
-    } finally {
-      setSubmitting(false)
-    }
+    // IMPORTANT: do NOT await before this on mobile
+    window.location.href = mailtoHref
+
+    setSubmitting(false)
   }
+
 
   return (
     <div className="fixed inset-0 z-50">
