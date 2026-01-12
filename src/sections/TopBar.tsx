@@ -9,7 +9,7 @@ export default function TopBar(){
       <Container className="flex items-center justify-between py-2 text-sm">
         <div className="flex items-center gap-4">
           {/* <a href="tel:+12345556789" className="inline-flex items-center gap-1 text-slate-600 hover:text-slate-900"><Phone className="h-4 w-4"/> {formatPhone(STRINGS.CONTACT_NUMBER)}</a> */}
-          <a href="mailto:hello@littlelumens.com" className="inline-flex items-center gap-1 text-slate-600 hover:text-slate-900"><Mail className="h-4 w-4"/> {STRINGS.CONTACT_EMAIL}</a>
+          <a href="mailto:august.daycare@outlook.com" className="inline-flex items-center gap-1 text-slate-600 hover:text-slate-900"><Mail className="h-4 w-4"/> {STRINGS.CONTACT_EMAIL}</a>
         </div>
         <div className="hidden items-center gap-3 md:flex text-slate-600">
           <a href={STRINGS.FACEBOOK}><Facebook className="h-4 w-4"/></a>
