@@ -2,6 +2,7 @@ import React from 'react'
 import Container from '@/components/shared/Container'
 import { Baby, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { FORMS } from "@/constants/strings";
 
 export default function Navbar() {
   const links: [string, string][] = [
@@ -13,14 +14,11 @@ export default function Navbar() {
   ]
 
   const formLinks = [
-    { label: 'Infant enrollment form', href: '/forms/Infant_form.pdf' },
-    { label: 'Toddler enrollment form', href: '/forms/Toddler_form.pdf' },
-    { label: 'Preschool enrollment form', href: '/forms/Preschool_form.pdf' },
-    {
-      label: 'Excursion & transportation consent',
-      href: '/forms/Excursion_and_Transportation_Consent.pdf',
+    { label: 'Infant enrollment form', href: FORMS.INFANT_ENROLLMENT },
+    { label: 'Toddler and Preschool enrollment form', href: FORMS.TODDLER_AND_PRESCHOOL_ENROLLMENT },
+    { label: 'Excursion & transportation consent', href: FORMS.EXCURSION_AND_TRANSPORTATION,
     },
-    { label: 'Medical form', href: '/forms/Medical_Form.pdf' },
+    { label: 'Medical form', href: FORMS.MEDICATION_FORM },
   ]
 
   return (

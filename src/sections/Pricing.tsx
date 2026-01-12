@@ -4,6 +4,7 @@ import SectionTitle from "@/components/shared/SectionTitle"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Button } from "@/components/ui/Button"
 import EnrollmentFormModal from "@/components/shared/EnrollmentFormModal" // <- adjust path if needed
+import { FORMS } from "@/constants/strings";
 
 type CarePrices = {
   monthly: string
@@ -44,7 +45,7 @@ export default function Pricing() {
             prices: { monthly: "$908", sixMonth: "n/a" },
           },
         ],
-        form: "/forms/Infant_form.pdf",
+        form: "/forms/Infant_form.pdf", // dont need this for now
       },
       {
         id: "toddler",
@@ -62,7 +63,7 @@ export default function Pricing() {
             prices: { monthly: "$808", sixMonth: "n/a" },
           },
         ],
-        form: "/forms/Toddler_form.pdf",
+        form: "/forms/Toddler_form.pdf", // dont need this for now
       },
       {
         id: "preschool",
@@ -80,7 +81,7 @@ export default function Pricing() {
             prices: { monthly: "$708", sixMonth: "n/a" },
           },
         ],
-        form: "/forms/Preschool_form.pdf",
+        form: "/forms/Preschool_form.pdf", // dont need this for now
         featured: true,
       },
     ],
@@ -237,7 +238,7 @@ export default function Pricing() {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         tierId={activeTier.id}
-        pdfUrl={activeTier.form}
+        pdfUrl={FORMS.ENROLLMENT}
       />
     </section>
   )

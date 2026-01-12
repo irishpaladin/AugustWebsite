@@ -10,3 +10,11 @@ export const STRINGS = {
   OPEN_DAYS: "Mon–Fri",
   OPEN_TIME: "6:30am–5:30pm"
 };
+
+export const FORMS = {
+  ENROLLMENT: "/forms/Enrollment form.pdf",
+  EXCURSION_AND_TRANSPORTATION: "/forms/Excursion and Transportation consent form.pdf",
+  INFANT_ENROLLMENT: "/forms/Infant enrollment form.pdf",
+  MEDICATION_FORM: "/forms/Medication form.pdf",
+  TODDLER_AND_PRESCHOOL_ENROLLMENT: "/forms/Toddler and Preschool enrollment form.pdf"
+}
