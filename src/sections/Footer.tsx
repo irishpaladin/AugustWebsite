@@ -37,7 +37,7 @@ export default function Footer() {
                 <div>
                     <h3 className="mb-3 font-semibold">Contact</h3>
                     <ul className="space-y-2 text-sm text-slate-600">
-                        <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> {formatPhone(STRINGS.CONTACT_NUMBER)} </li>
+                        {/* <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> {formatPhone(STRINGS.CONTACT_NUMBER)} </li> */}
                         <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> {STRINGS.CONTACT_EMAIL}</li>
                         <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> {STRINGS.ADDRESS_LINE1}</li>
                     </ul>
