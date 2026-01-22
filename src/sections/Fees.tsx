@@ -26,7 +26,7 @@ type AgeTier = {
   featured?: boolean
 }
 
-export default function Pricing() {
+export default function Fees() {
   const ageTiers: AgeTier[] = useMemo(
     () => [
       {
@@ -94,11 +94,11 @@ export default function Pricing() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <section id="pricing" className="border-b bg-white py-16 md:py-24">
+    <section id="fees" className="border-b bg-white py-16 md:py-24">
       <Container>
         <SectionTitle
           kicker="Monthly Fee Schedule"
-          title="Simple, transparent pricing"
+          title="Simple, transparent fees"
           subtitle="Select an age group to view rates. Click download form to open the enrollment form, fill it out, and submit."
         />
 

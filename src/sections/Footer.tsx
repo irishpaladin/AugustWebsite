@@ -30,7 +30,7 @@ export default function Footer() {
                     <ul className="space-y-2 text-sm text-slate-600">
                         <li><a href="#about">About</a></li>
                         {/* <li><a href="#team">Team</a></li> */}
-                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#fees">Fees</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>

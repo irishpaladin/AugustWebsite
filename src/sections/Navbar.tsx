@@ -11,7 +11,7 @@ export default function Navbar() {
   const links: [string, string][] = [
     ['About', '#about'],
     ['Programs', '#programs'],
-    ['Pricing', '#pricing'],
+    ['Fees', '#fees'],
     ['FAQ', '#faq'],
     ['Contact', '#contact'],
   ]

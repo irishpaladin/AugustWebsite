@@ -6,7 +6,7 @@ import About from '@/sections/About'
 import Programs from '@/sections/Programs'
 import Team from '@/sections/Team'
 import Testimonials from '@/sections/Testimonials'
-import Pricing from '@/sections/Pricing'
+import Fees from '@/sections/Fees'
 import FAQ from '@/sections/FAQ'
 import Contact from '@/sections/Contact'
 import Footer from '@/sections/Footer'
@@ -21,7 +21,7 @@ export default function App() {
             <Programs />
             {/* <Team /> */}
             {/* <Testimonials /> */}
-            <Pricing />
+            <Fees />
             <FAQ />
             <Contact />
             <Footer />
