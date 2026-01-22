@@ -6,7 +6,7 @@ export const STRINGS = {
   INSTAGRAM: "https://www.instagram.com/august_daycare",
   ADDRESS_LINE1: "9 McCormick Cres",
   ADDRESS_LINE2: "Regina, S4T6J9",
-  CONTACT_NUMBER: "1234567890",
+  CONTACT_NUMBER: "3068021447",
   OPEN_DAYS: "Mon–Fri",
   OPEN_TIME: "6:30am–5:30pm"
 };
