@@ -10,7 +10,7 @@ export default function About(){
         <SectionTitle kicker="Why Choose Us" title="Nurturing, safe, and play‑based" subtitle="Everything we do is built on love, safety, and discovery."/>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Feature icon={<Heart className="h-6 w-6" />} title="Warm & Inclusive" desc="Every child is celebrated. We create a welcoming space for all families." />
-          <Feature icon={<Apple className="h-6 w-6" />} title="Food & Snacks" desc="1 Meal, 2 snacks and 2% or Homogenized milk is provided for children 18 months or older throughout the day." />
+          <Feature icon={<Apple className="h-6 w-6" />} title="Nutritious Food" desc="1 Meal, 2 snacks and 2% or Homogenized milk is provided for children 18 months or older throughout the day." />
           <Feature icon={<ShieldCheck className="h-6 w-6"/>} title="Safety First" desc="Secure check‑in, sanitized spaces, and CPR‑trained educators."/>
           {/* <Feature icon={<Baby className="h-6 w-6"/>} title="Play‑Based Learning" desc="Curiosity‑driven curriculum aligned with early learning standards."/> */}
         </div>
