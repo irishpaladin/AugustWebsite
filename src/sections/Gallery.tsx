@@ -60,6 +60,13 @@ export default function Gallery() {
                 className="h-[420px] w-full rounded-[24px] object-cover sm:h-[520px]"
               />
 
+              {/* TODO: Remove this div later when we have real images. It is just a temporary notice for the placeholder images. */}
+              <div className="absolute inset-x-4 top-4 flex justify-center z-10 pointer-events-none">
+                <div className="bg-white/50 px-3 py-1 rounded text-sm text-slate-900 backdrop-blur-sm">
+                  Images shown are placeholders and will be replaced with real photos later.
+                </div>
+              </div>
+
               <button
                 type="button"
                 onClick={showPrev}
