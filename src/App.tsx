@@ -6,6 +6,7 @@ import About from '@/sections/About'
 import Programs from '@/sections/Programs'
 import Team from '@/sections/Team'
 import Testimonials from '@/sections/Testimonials'
+import Gallery from '@/sections/Gallery'
 import Fees from '@/sections/Fees'
 import FAQ from '@/sections/FAQ'
 import Contact from '@/sections/Contact'
@@ -19,6 +20,7 @@ export default function App() {
             <Hero />
             <About />
             <Programs />
+            <Gallery />
             {/* <Team /> */}
             {/* <Testimonials /> */}
             {/* <Fees /> */}
