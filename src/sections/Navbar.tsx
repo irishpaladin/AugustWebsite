@@ -3,6 +3,8 @@ import Container from '@/components/shared/Container'
 import { Baby, FileText, Menu, X, ChevronDown, Download } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import DownloadModal from '@/utility/DownloadModal'
+import { useFetchJson } from '@/hooks/useFetchJson'
+import { FormLink } from '@/types/form'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -43,15 +45,15 @@ export default function Navbar() {
     { label: 'Contact', href: '#contact' },
   ]
 
-  const formLinks = Object.entries(
-    import.meta.glob('../../public/forms/*', { eager: true, import: 'default' })
+  const { data: dynamicFormLinks } = useFetchJson<FormLink[]>('/forms.json')
+
+  const formLinks = React.useMemo(
+    () =>
+      (dynamicFormLinks ?? []).slice().sort((a, b) =>
+        a.label.localeCompare(b.label),
+      ),
+    [dynamicFormLinks],
   )
-    .map(([path, href]) => {
-      const fileName = path.split('/').pop() ?? ''
-      const label = fileName.replace(/\.[^.]+$/, '')
-      return { label, href: href as string }
-    })
-    .sort((a, b) => a.label.localeCompare(b.label))
 
   const closeMobileMenu = () => {
     setMobileOpen(false)

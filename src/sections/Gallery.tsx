@@ -2,22 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Container from '@/components/shared/Container'
 import SectionTitle from '@/components/shared/SectionTitle'
-
-const imageModules = import.meta.glob('/public/images-gallery/*.{png,jpg,jpeg,webp,gif,svg}', {
-  eager: true,
-  import: 'default',
-}) as Record<string, string>
-
-const galleryImages = Object.entries(imageModules)
-  .map(([path, src]) => ({
-    src,
-    alt: path.split('/').pop()?.replace(/\.[^.]+$/, '') || 'Gallery image',
-  }))
-  .sort((a, b) => a.src.localeCompare(b.src))
+import { useFetchJson } from '@/hooks/useFetchJson'
+import { GalleryImage } from '@/types/gallery'
 
 export default function Gallery() {
+  const { data: galleryImagesData } = useFetchJson<GalleryImage[]>('/gallery.json')
+  const galleryImages = galleryImagesData ?? []
   const [activeIndex, setActiveIndex] = useState(0)
   const totalImages = galleryImages.length
+
+  const activeIndexSafe = totalImages > 0 ? activeIndex % totalImages : 0
+  const activeImage = galleryImages[activeIndexSafe]
 
   useEffect(() => {
     if (totalImages <= 1) return
@@ -29,6 +24,10 @@ export default function Gallery() {
     return () => window.clearInterval(intervalId)
   }, [totalImages])
 
+  if (totalImages === 0) {
+    return null
+  }
+
   const showPrev = () => {
     setActiveIndex((current) => (current - 1 + totalImages) % totalImages)
   }
@@ -38,9 +37,9 @@ export default function Gallery() {
   }
 
   const visibleThumbs = [
-    (activeIndex - 1 + totalImages) % totalImages,
-    activeIndex,
-    (activeIndex + 1) % totalImages,
+    (activeIndexSafe - 1 + totalImages) % totalImages,
+    activeIndexSafe,
+    (activeIndexSafe + 1) % totalImages,
   ]
 
   return (
@@ -56,8 +55,8 @@ export default function Gallery() {
           <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
             <div className="relative">
               <img
-                src={galleryImages[activeIndex].src}
-                alt={galleryImages[activeIndex].alt}
+                src={activeImage.src}
+                alt={activeImage.alt}
                 className="h-[420px] w-full rounded-[24px] object-cover sm:h-[520px]"
               />
 
