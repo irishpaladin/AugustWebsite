@@ -23,11 +23,11 @@ export default function Hero() {
           </Badge>
 
           <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
-            A bright start for little minds
+            Respect. Nurture. Inspire.
           </h1>
 
           <p className="mt-4 text-lg text-slate-600">
-            Safe, play-based learning for ages 6 months to 5 years. Flexible full-time and
+            Safe, play-based learning for ages 8 months+. Flexible full-time and
             part-time programs.
           </p>
 

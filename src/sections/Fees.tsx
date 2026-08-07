@@ -32,7 +32,7 @@ export default function Fees() {
       {
         id: "infant",
         label: "Infant",
-        ages: "0–1.5 years old",
+        ages: "8mos–1.5 years old",
         careTypes: [
           {
             label: "Full-time",
@@ -50,7 +50,7 @@ export default function Fees() {
       {
         id: "toddler",
         label: "Toddler",
-        ages: "1.6–3 years old",
+        ages: "1.5–2.5 years old",
         careTypes: [
           {
             label: "Full-time",
@@ -68,7 +68,7 @@ export default function Fees() {
       {
         id: "preschool",
         label: "Preschool",
-        ages: "3–5 years old",
+        ages: "2.5–5 years old",
         careTypes: [
           {
             label: "Full-time",
