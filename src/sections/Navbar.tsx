@@ -2,7 +2,6 @@ import React from 'react'
 import Container from '@/components/shared/Container'
 import { Baby, FileText, Menu, X, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { FORMS } from '@/constants/strings'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -17,12 +16,15 @@ export default function Navbar() {
     ['Contact', '#contact'],
   ]
 
-  const formLinks = [
-    { label: 'Infant enrollment form', href: FORMS.INFANT_ENROLLMENT },
-    { label: 'Toddler and Preschool enrollment form', href: FORMS.TODDLER_AND_PRESCHOOL_ENROLLMENT },
-    { label: 'Excursion & transportation consent', href: FORMS.EXCURSION_AND_TRANSPORTATION },
-    { label: 'Medical form', href: FORMS.MEDICATION_FORM },
-  ]
+  const formLinks = Object.entries(
+    import.meta.glob('../../public/forms/*', { eager: true, import: 'default' })
+  )
+    .map(([path, href]) => {
+      const fileName = path.split('/').pop() ?? ''
+      const label = fileName.replace(/\.[^.]+$/, '')
+      return { label, href: href as string }
+    })
+    .sort((a, b) => a.label.localeCompare(b.label))
 
   const closeMobileMenu = () => {
     setMobileOpen(false)
