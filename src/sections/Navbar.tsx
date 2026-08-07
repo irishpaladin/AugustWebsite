@@ -1,19 +1,46 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 import Container from '@/components/shared/Container'
-import { Baby, FileText, Menu, X, ChevronDown } from 'lucide-react'
+import { Baby, FileText, Menu, X, ChevronDown, Download } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const [formsOpen, setFormsOpen] = React.useState(false)
+  const [downloadNoticeOpen, setDownloadNoticeOpen] = React.useState(false)
 
-  const links: [string, string][] = [
-    ['About', '#about'],
-    ['Programs', '#programs'],
-    ['Gallery', '#gallery'],
-    // ['Fees', '#fees'],
-    ['FAQ', '#faq'],
-    ['Contact', '#contact'],
+  const handbookDownloadHref = '/forms/August Daycare-Parent Handbook July 2026.pdf'
+
+  const triggerDownload = React.useCallback((href: string) => {
+    const link = document.createElement('a')
+    link.href = href
+    link.download = 'August Daycare-Parent Handbook July 2026.pdf'
+    link.target = '_blank'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }, [])
+
+  const handleDownloadLinkClick = React.useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      event.preventDefault()
+      setDownloadNoticeOpen(true)
+      triggerDownload(href)
+    },
+    [triggerDownload]
+  )
+
+  const links: Array<{ label: string; href: string; isDownload?: boolean }> = [
+    { label: 'About', href: '#about' },
+    { label: 'Programs', href: '#programs' },
+    { label: 'Gallery', href: '#gallery' },
+    {
+      label: 'Fees',
+      href: handbookDownloadHref,
+      isDownload: true,
+    },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Contact', href: '#contact' },
   ]
 
   const formLinks = Object.entries(
@@ -40,6 +67,57 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
+  const downloadModal = downloadNoticeOpen
+    ? createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 p-4"
+          onClick={() => setDownloadNoticeOpen(false)}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-slate-900">Download started</p>
+                <p className="mt-2 text-sm text-slate-600">
+                  Your handbook PDF should begin downloading shortly. If it does not, use the
+                  button below to try again.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="rounded-full p-1 text-slate-500 hover:bg-slate-100 hover:text-slate-700"
+                onClick={() => setDownloadNoticeOpen(false)}
+                aria-label="Close download notice"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+                onClick={() => triggerDownload(handbookDownloadHref)}
+              >
+                <Download className="h-4 w-4" />
+                Download again
+              </button>
+              <button
+                type="button"
+                className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                onClick={() => setDownloadNoticeOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )
+    : null
+
   return (
     <div className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
       <Container className="flex items-center justify-between py-4">
@@ -49,13 +127,25 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 md:flex">
-          {links.map(([label, href]) => (
+          {links.map((link) => (
             <a
-              key={label}
-              href={href}
-              className="text-sm font-medium text-slate-600 hover:text-slate-900"
+              key={link.label}
+              href={link.href}
+              download={link.isDownload ? true : undefined}
+              onClick={(event) => {
+                if (link.isDownload) {
+                  handleDownloadLinkClick(event, link.href)
+                }
+              }}
+              className="inline-flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-900"
             >
-              {label}
+              <span>{link.label}</span>
+              {link.isDownload ? (
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
+                  <Download className="h-3 w-3" />
+                  PDF
+                </span>
+              ) : null}
             </a>
           ))}
 
@@ -127,14 +217,26 @@ export default function Navbar() {
       >
         <Container className="py-3">
           <div className="flex flex-col gap-1">
-            {links.map(([label, href]) => (
+            {links.map((link) => (
               <a
-                key={label}
-                href={href}
-                onClick={closeMobileMenu}
-                className="rounded-xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                key={link.label}
+                href={link.href}
+                download={link.isDownload ? true : undefined}
+                onClick={(event) => {
+                  closeMobileMenu()
+                  if (link.isDownload) {
+                    handleDownloadLinkClick(event, link.href)
+                  }
+                }}
+                className="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
-                {label}
+                <span>{link.label}</span>
+                {link.isDownload ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
+                    <Download className="h-3 w-3" />
+                    PDF
+                  </span>
+                ) : null}
               </a>
             ))}
 
@@ -184,6 +286,8 @@ export default function Navbar() {
           </div>
         </Container>
       </div>
+
+      {downloadModal}
     </div>
   )
 }
