@@ -1,9 +1,10 @@
 [
-  { "label": "August Daycare-Parent Handbook July 2026", "href": "/forms/August Daycare-Parent Handbook July 2026.pdf" },
-  { "label": "Child Care Agreement", "href": "/forms/Child Care Agreement.pdf" },
+  { "label": "Parent Handbook 2026", "href": "/forms/Parent Handbook-2026.pdf" },
+  { "label": "Child Care Agreement (2026)", "href": "/forms/Child Care Agreement-2026.pdf" },
   { "label": "Child Enrollment Form", "href": "/forms/Child Enrollment Form.pdf" },
-  { "label": "Enrollment Document Checklist", "href": "/forms/Enrollment Document Checklist.pdf" },
-  { "label": "Excursion Consent Form", "href": "/forms/Excursion Consent Form.pdf" },
-  { "label": "Infant Feeding and Care Information Form", "href": "/forms/Infant Feeding and Care Information Form.pdf" },
-  { "label": "Medication Authorization Form", "href": "/forms/Medication Authorization Form.pdf" }
+  { "label": "Enrollment Document Checklist", "href": "/forms/Document Checklist.pdf" },
+  { "label": "Local Excursion Consent Form", "href": "/forms/Local Excursion Consent Form.pdf" },
+  { "label": "Infant Feeding & Care Information Form", "href": "/forms/Feeding & Care Information Form (For Infants only).pdf" },
+  { "label": "Medication Authorization Form", "href": "/forms/Medication Authorization Form (if applicable).pdf" },
+  { "label": "Media Release Form", "href": "/forms/Media Release Form.pdf" }
 ]
