@@ -3,10 +3,32 @@ import Container from '@/components/shared/Container'
 import { Baby, Phone, Mail, MapPin, Download } from 'lucide-react'
 import { STRINGS } from "@/constants/strings"
 import { formatPhone } from '@/utility/FormatPhone'
+import DownloadModal from '@/utility/DownloadModal'
 
-const handbookDownloadHref = '/forms/August Daycare-Parent Handbook July 2026.pdf'
+const handbookDownloadHref = '/forms/Parent Handbook-2026.pdf'
 
 export default function Footer() {
+    const [downloadNoticeOpen, setDownloadNoticeOpen] = React.useState(false)
+
+    const triggerDownload = React.useCallback((href: string) => {
+        const link = document.createElement('a')
+        link.href = href
+        link.download = 'Parent Handbook-2026.pdf'
+        link.target = '_blank'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }, [])
+
+    const handleDownloadLinkClick = React.useCallback(
+        (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+            event.preventDefault()
+            setDownloadNoticeOpen(true)
+            triggerDownload(href)
+        },
+        [triggerDownload]
+    )
+
     return (
         <footer className="border-t bg-white py-12">
             <Container className="grid gap-8 md:grid-cols-4">
@@ -37,6 +59,7 @@ export default function Footer() {
                             <a
                                 href={handbookDownloadHref}
                                 download
+                                onClick={(event) => handleDownloadLinkClick(event, handbookDownloadHref)}
                                 className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900"
                             >
                                 <span>Fees</span>
@@ -59,6 +82,13 @@ export default function Footer() {
                 </div>
             </Container>
             <Container className="mt-8 border-t pt-6 text-center text-xs text-slate-600">© {new Date().getFullYear()} {STRINGS.SITE_NAME}. All rights reserved.</Container>
+            <DownloadModal
+                isOpen={downloadNoticeOpen}
+                downloadHref={handbookDownloadHref}
+                title="Download started"
+                message="This download is for:"
+                onClose={() => setDownloadNoticeOpen(false)}
+            />
         </footer>
     )
 }

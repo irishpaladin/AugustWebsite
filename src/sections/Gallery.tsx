@@ -6,7 +6,7 @@ import { useFetchJson } from '@/hooks/useFetchJson'
 import { GalleryImage } from '@/types/gallery'
 
 export default function Gallery() {
-  const { data: galleryImagesData } = useFetchJson<GalleryImage[]>('/gallery.json')
+  const { data: galleryImagesData } = useFetchJson<GalleryImage[]>('/images-gallery/gallery.json')
   const galleryImages = galleryImagesData ?? []
   const [activeIndex, setActiveIndex] = useState(0)
   const totalImages = galleryImages.length

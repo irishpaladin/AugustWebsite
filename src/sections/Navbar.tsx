@@ -11,12 +11,12 @@ export default function Navbar() {
   const [formsOpen, setFormsOpen] = React.useState(false)
   const [downloadNoticeOpen, setDownloadNoticeOpen] = React.useState(false)
 
-  const handbookDownloadHref = '/forms/August Daycare-Parent Handbook July 2026.pdf'
+  const handbookDownloadHref = '/forms/Parent Handbook-2026.pdf'
 
   const triggerDownload = React.useCallback((href: string) => {
     const link = document.createElement('a')
     link.href = href
-    link.download = 'August Daycare-Parent Handbook July 2026.pdf'
+    link.download = 'Parent Handbook-2026.pdf'
     link.target = '_blank'
     document.body.appendChild(link)
     link.click()
@@ -45,7 +45,7 @@ export default function Navbar() {
     { label: 'Contact', href: '#contact' },
   ]
 
-  const { data: dynamicFormLinks } = useFetchJson<FormLink[]>('/forms.json')
+  const { data: dynamicFormLinks } = useFetchJson<FormLink[]>('/forms/forms.json')
 
   const formLinks = React.useMemo(
     () =>
