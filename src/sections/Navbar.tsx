@@ -172,8 +172,8 @@ export default function Navbar() {
 
       {/* Mobile menu panel */}
       <div
-        className={`md:hidden overflow-hidden border-t bg-white/95 backdrop-blur transition-[max-height] duration-200 ${
-          mobileOpen ? 'max-h-[520px]' : 'max-h-0'
+        className={`md:hidden overflow-y-auto border-t bg-white/95 backdrop-blur transition-[max-height] duration-200 ${
+          mobileOpen ? 'max-h-[60vh]' : 'max-h-0'
         }`}
       >
         <Container className="py-3">
@@ -222,7 +222,7 @@ export default function Navbar() {
                 <p className="px-2 pb-2 text-xs font-semibold text-slate-500">
                   Download enrollment & consent forms
                 </p>
-                <ul className="space-y-1 text-sm text-slate-700">
+                <ul className="max-h-64 space-y-1 overflow-y-auto text-sm text-slate-700">
                   {formLinks.map((form) => (
                     <li key={form.label}>
                       <a
